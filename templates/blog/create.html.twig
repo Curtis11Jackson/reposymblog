@@ -4,31 +4,43 @@
 
 {% block body %}
 
-    <h1>Création d'un article</h1>
+    {% if editMode %}
+	    <h1>Modification de l'article <php $i></h1>
+    {% else %}
+        <h1>Création d'un article</h1>
+    {% endif %}
 
-    {{ form_start(formArticle) }}
+	{{ form_start(formArticle) }}
 
-    {{ form_widget(formArticle) }}
+	{{ form_row(formArticle.title, {'attr' : {'placeholder': "Titre de l'article"}}) }}
+	{{ form_row(formArticle.content, {'attr' : {'placeholder': "Contenu de l'article"}}) }}
+	{{ form_row(formArticle.image, {'attr' : {'placeholder': "https://"}}) }}
 
-    <button type="submit" class="btn btn-success">Enregistrer</button>
-    
-    {{ form_end(formArticle) }}
+	<button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter l'article
+        {% endif %}
+    </button>
+
+	{{ form_end(formArticle) }}
 
 
-    {# <div class="form-group">
-        <label for"">Titre</label>
-        {{ form_widget(formArticle.title) }}
-    </div>
-
-    <div class="form-group">
-        <label for"">Contenu</label>
-        {{ form_widget(formArticle.content) }}
-    </div>
-
-    <div class="form-group">
-        <label for"">Image</label>
-        {{ form_widget(formArticle.image) }}
-    </div> #}
+	{# <div class="form-group">
+	        <label for"">Titre</label>
+	        {{ form_widget(formArticle.title) }}
+	    </div>
+	
+	    <div class="form-group">
+	        <label for"">Contenu</label>
+	        {{ form_widget(formArticle.content) }}
+	    </div>
+	
+	    <div class="form-group">
+	        <label for"">Image</label>
+	        {{ form_widget(formArticle.image) }}
+	    </div> #}
 
 
 {% endblock %}
