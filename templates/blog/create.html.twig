@@ -1,11 +1,12 @@
 {% extends "base.html.twig" %}
 
+
 {% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
 
     {% if editMode %}
-	    <h1>Modification de l'article <php $i></h1>
+	    <h1>Modification de l'article</h1>
     {% else %}
         <h1>Création d'un article</h1>
     {% endif %}
