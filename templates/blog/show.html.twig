@@ -18,19 +18,36 @@
 <a href="{{ path('blog_edit', {'id': article.id}) }}">Modifier l'article</a>
 <section id="commentaires">
 
+    <h4>{{ article.comments | length }} Commentaires :</h4>
 
-    {% for comment in article.comments %}
-    <div class="comment">
-        <div class="row">
-            <div class="col-3">
-                {{ comment.author }} (<small>{{ comment.createdAt | date ('d/m/Y à h:i') }}</small>)
-            </div>
-            <div class="col">
-                {{ comment.content | raw }}
+    
+        {% for comment in article.comments %}
+        <div class="comment">
+            <div class="row">
+                <div class="col-3">
+                    {{ comment.author }} (<small>{{ comment.createdAt | date ('d/m/Y à h:i') }}</small>)
+                </div>
+                <div class="col">
+                    {{ comment.content | raw }}
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+
+        {% if app.user %}
+        {{ form_start (commentForm) }}
+        {{ form_row (commentForm.author, {'attr':{'placeholder':"Votre nom"}})}}
+        {{ form_row (commentForm.content, {'attr':{'placeholder':"Votre Commentaire"}})}}
+
+        <button type="submit" class="btn btn-outline-success">Enregistrer</button>
+
+        {{ form_end (commentForm)}}
+
+    {% else %}
+        <h4>Vous devez être connecté(e) pour commenter</h4>
+        <a href="{{path('security_login')}}" class="btn btn-outline-light">Me connecter</a>
+    {% endif %}
+
 </section>
 
 
